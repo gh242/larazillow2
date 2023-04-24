@@ -1,0 +1,132 @@
+
+把c:\php8.2.5 改為c:\php
+
+composer config disable-tls true
+composer config secure-http false
+
+
+
+php.ini
+extension=php_openssl 打開
+
+建立專案：
+1.
+composer create-project laravel/laravel larazillow2  (php.ini extension=fileinfo 這個要打開專案才建得起來)
+
+25. Adding Vue and Vite to the stack
+2.npm install --save-dev vue @vitejs/plugin-vue
+
+26.config Inertia.js
+	安裝inertiajs
+
+	composer config -g -- disable-tls false
+
+3.composer require inertiajs/inertia-laravel
+
+	https://inertiajs.com/server-side-setup
+	https://inertiajs.com/client-side-setup
+
+	rename welcome.blade.php -> app.blade.php
+	安裝vue3
+4.npm install @inertiajs/vue3
+npm install @inertiajs/inertiajs @inertiajs/vue3
+
+#查看route
+php artisan route:list
+
+----按Win 和R，打开运行窗口。
+-----输入services.msc确定打开服务窗口。
+
+------若要停止「IIS Windows 處理序啟用」服務，請執行此命令： iisreset -stop
+
+********** .env APP_URL=http://localhost:8000  *********************
+
+34.(option) using linter(ESLint)
+	add jsconfig.json
+	 npm install --save-dev eslint eslint-plugin-vue 
+		add .eslintrc.js  內容 copy課程
+
+	.vscode\settings.json
+	{
+	  "eslint.validate" :[
+		"javascript",
+		"javascriptvue",
+		"vue"
+	  ],
+	  "eslint.format.enable" : true,
+	  "editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true 
+	  },
+	}
+
+37.Debugbar for Laravel
+	composer require barryvdh/laravel-debugbar --dev
+
+	IDE Helper Generator for Laravel
+	composer require --dev barryvdh/laravel-ide-helper
+
+	php artisan ide-helper:generate
+
+38.Connecting to the database
+	add docker-compose.yml    內容copy 課程
+
+	docker compose up
+	php artisan db:show
+
+39.Models and migrations
+	php artisan make:model Listing -m
+
+	php artisan migrate
+
+40.Working with Migrations
+	php artisan make:migration add_fields_to_listings_table
+
+	php artisan migrate:status
+	php artisan migrate:rollback
+
+	php artisan migrate
+
+41.Model Factories & Seeders (development env)
+	php artisan make:factory ListingFactory
+	
+	php artisan migrate:refresh
+	
+	php artisan db:seed
+	
+	php artisan migrate:refresh --seed  #table重新建立，fake資料也重新建
+	
+42.Querying the Database  -- Query Builder
+
+	php artisan tinker
+	composer dump-autoload  # 下這個指令，就可以使用alias
+	App\Models\Listing::all()  ==> Listing::all()
+	App\Models\Listing::find(15) ==> Listing::find(15) 	# find id=15 
+	
+	Listing::where('beds', '>', 4)->get()
+	Listing::where('area', '>', 200)->get()
+	Listing::where('area', '>', 200)->orderBy('beds', 'desc')->get()
+	
+43.(Challenged)
+	Listing::where('beds', '>=', 4)->orderBy('price', 'asc')->first()
+	
+44.Updating and Inserting Data, Mass Assignment
+
+	$listing = Listing::find(10)
+	$listing->city = 'Tinker'  # 修改資料
+	$listing->save()
+	
+	$listing = new Listing
+	$listing->beds = 1
+	$listing->baths = 1
+	$listing->area = 50
+	$listing->city = 'London'
+	$listing->street = 'Tinker St'
+	$listing->street_nr = 10
+	$listing->code = 'TK'
+	$listing->price = 100_000
+	$listing->save()
+	
+	設定好model ，要重開 php artisan tinker
+	Listing::create(['beds' => 2, 'baths' => 2, 'area' => 100, 'city' => 'North', 'street' => 'Tinker st', 'street_nr' => 20, 'code' => 'TS', 'price' => 200_000])
+	
+	
