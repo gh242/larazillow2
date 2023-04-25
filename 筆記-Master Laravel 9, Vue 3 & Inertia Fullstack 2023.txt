@@ -129,4 +129,10 @@ php artisan route:list
 	設定好model ，要重開 php artisan tinker
 	Listing::create(['beds' => 2, 'baths' => 2, 'area' => 100, 'city' => 'North', 'street' => 'Tinker st', 'street_nr' => 20, 'code' => 'TS', 'price' => 200_000])
 	
+45.Resource Controller and Route Model Binding
+	php artisan make:controller --resource ListingController
 	
+	web.php
+	Route::resource('listing', ListingController::class);
+	
+	php artisan route:list
