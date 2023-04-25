@@ -136,3 +136,19 @@ php artisan route:list
 	Route::resource('listing', ListingController::class);
 	
 	php artisan route:list
+	
+49.Middlewares and Sharing Data with All Pages
+	php artisan inertia:middleware
+	
+	在kernel.php加上
+	\App\Http\Middleware\HandleInertiaRequests::class,
+	
+	HandleInertiaRequests.php加上
+	public function share(Request $request): array
+    {
+        return array_merge(parent::share($request), [
+            'flash'=> [
+                'success'=> $request->session()->get('success')
+            ]
+        ]);
+    }
