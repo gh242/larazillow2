@@ -152,3 +152,8 @@ php artisan route:list
             ]
         ]);
     }
+	
+50. 
+	使用 page.props.flash.success ，
+	而不是page.props.value.flash.success
+	
