@@ -157,6 +157,11 @@ php artisan route:list
 	使用 page.props.flash.success ，
 	而不是page.props.value.flash.success
 	
-52. Delete Form
+53. Deleting Form
 	#重新建立一開始的20筆假資料
 	php artisan migrate:refresh --seed
+	
+54. Laravel Route Names in Vue
+	composer require tightenco/ziggy
+	
+	
