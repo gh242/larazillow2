@@ -157,3 +157,6 @@ php artisan route:list
 	使用 page.props.flash.success ，
 	而不是page.props.value.flash.success
 	
+52. Delete Form
+	#重新建立一開始的20筆假資料
+	php artisan migrate:refresh --seed
